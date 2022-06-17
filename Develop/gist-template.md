@@ -6,7 +6,7 @@
 
 Above is a Regular Expression or Regex for short. This perticular Regex finds or "validates" a email. Regex's are very useful in validating and extracting strings of text. In this guide I will explain how they work and what regular expressions are all about.
 
-Regular Expressions use what are called tokens to denote meaning and each token has a perticular use. Every Regex starts and ends with a forward slash. Lets look at an example,
+To start, regular Expressions use what are called tokens to denote meaning and each token has a perticular use. Every Regex starts and ends with a forward slash /. Lets look at an example,
 
 This is a Regex.
 
@@ -66,9 +66,93 @@ If you put the two together `/^foo$/` , the Regex would search for an exact stri
 
 There is also /b and /B which match a character beginning or ending with a \w (white space character).
 
+In the email regex we can see it takes advantage of anchors.
+
 ### Quantifiers
 
+Next up are Quantifiers. This tokens specify how many instances of a certain character to match.
+
+The first anchor is \*. This will match zero or more of the preceding character.
+
+The regex `/foo*/` will match
+
+<code><mark>fo</mark></code>
+
+and
+
+<code><mark>foooooooooooooooo</mark></code>
+
+The + anchor will match one or more character preceding it.
+
+Does not match
+
+<code>fo</code>
+
+Match's
+
+<code><mark>foo</mark></code>
+
+<code><mark>foooooooooo</mark></code>
+
+There is also the question mark ? which will match a character string or a character string followed by its last char.
+
+`/foo?/`
+
+<code><mark>foo</mark> <mark>fo</mark> o<mark>fo</mark></code>
+
+The most common quantifier token is the square brackets {}. They are used to match ranges.
+
+For example
+
+`/foo{5}/` Will match exactly 5 o's
+
+<code><mark>fooooo</mark>ooooo</code>
+
+<code>foooo</code>
+
+Using a comma , we will match the specify number or more
+
+`/foo{3,}/`
+
+Note that three o's will not match in these case because we have two o's in "foo".
+
+<code>fooo</code>
+
+<code><mark>foooo</mark></code>
+
+<code><mark>fooooooooooooo</mark></code>
+
+We can combine these too matching a range between the numbers.
+
+`/foo{3,6}/`
+
+<code>fooo</code>
+
+<code><mark>foooo</mark></code>
+
+<code><mark>fooooooo</mark></code>
+
+<code><mark>fooooooo</mark>ooooo</code>
+
+There are also greedy, lazy and possessive quantifiers.
+
 ### OR Operator
+
+OR uses the (|) and []. It will match the character on the left side OR the character on the right.
+
+`/foo(a|b)/`
+
+<code><mark>fooa</mark></code>
+
+<code><mark>fooob</mark></code>
+
+The square bracket will match only one or the other.
+
+`/foo[ab]/`
+
+<code><mark>fooa</mark>b</code>
+
+<code><mark>foob</mark>a</code>
 
 ### Character Classes
 
