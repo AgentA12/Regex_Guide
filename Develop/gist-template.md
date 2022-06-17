@@ -257,12 +257,95 @@ We could now replace and check certain groups. For example we could replace a cr
 
 ### Bracket Expressions
 
+Bracket expressions are used to match a single character instead the brackets or a collection of characters.
+
+`/[foobar]/` will match <code><mark>foobar</mark></code> 
+
+or if the global flag is used will match all characters inside the brackets 
+
+`/[foobar]/g`
+
+<code><mark>foobar</mark> <mark>raboof</mark> <mark>ofbra</mark></code>
+
+brackets can also have ranges.
+
+`/[a-z]/` will match any lowercase char from a-z. This can be done wil digits also.
+
+`/[^a-e]/` will match any chars that are not in the range of a-e.
+
+There are also . used and == used in bracket notation.
+
 ### Greedy and Lazy Match
+
+Greedy and lazy matching refer to how a regex will search. Greedy regexs will consume as many instances as possible we lazy match as few instances as possible.
+
+For example the + would be considered greedy where a ? would be lazy.
 
 ### Boundaries
 
+Boundaries are like anchors but they only match a workd boundary. 
+
+For example
+
+`/\bfoobar\b/`
+
+will match 
+
+<code><mark>foobar</mark> foo bar bar foo barfoo </code>
+
 ### Back-references
 
-### Look-ahead and Look-behind
+Back references refer to groups. They use \1,\2 and so on. 
+
+\1 will match any characters that appear twice one after the other
+
+`/([foobar])\1/`
+
+<code>f<mark>oo</mark>bar barfoo foo ba<mark>rr</mark></code>
+
+### The email validator
+
+`/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/`
+
+So now lets try and understand what is going on here
+
+To start off we have our anchor specifying were to start and end the search.
+
+Then we have our first group. Group One
+
+`([a-z0-9_\.-]+)`
+
+In this group we are looking for any character from a-z and digits 0-9. Also we have to use the case insensitive flag to match capital letters.
+
+we are also allowing any _. or dashes. Note we have a backslash before the . Recall. has a special meaning so we need to escape it with \\.
+
+We then end with a + (greedy). This makes our first group. "John_doe" will be valid.
+
+Second Group.
+
+`@([\da-z\.-]+)`
+
+Notice the @ before the group. This must be inbetween the first and second group to form a valid email.
+
+After the @ we have our second group with a bracket.
+
+In this bracket we allow digits \d and chars from a-z, and a period (escaped) also a -. Ended with a +.
+
+Any other special characters are not allowed.
+
+Third Group
+
+`\.([a-z\.]{2,6})$`
+
+Again notice the \\. before the group. A period is required inbetween the first and second group.
+
+Then inside our group we have a bracket allowing a-z and . characters, also only allowing a range of 2 to 6 {2, 6}. (so .ca or .com) Then our end anchor $.
+
+Thats it! I hope you learned something new. Now you can put regexs to practice for powerful validation.
 
 ## Author
+
+Hi, my names andrew and i'm a web developer that loves learning and solving problems. You can see my github here
+
+[https://github.com/AgentA12?tab=repositories](https://github.com/AgentA12?tab=repositories)
+
