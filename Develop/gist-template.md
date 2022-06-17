@@ -156,9 +156,104 @@ The square bracket will match only one or the other.
 
 ### Character Classes
 
+Character classes match a class of characters.
+
+`\d` will match a single character that is a digit.
+
+`\w` will match a word character.
+
+`\s` will match a white space character.
+
+Some examples.
+
+`/\d/`
+
+<code> <mark>123</mark> Hello world! I am <mark>0</mark>b<mark>110100</mark> years old.</code>
+
+`/\w/`
+
+<code><mark>hello</mark> <mark>world</mark>!</code>
+
+`/\s/`
+
+<code>hello<mark> </mark>world!</code>
+
+You can also match carriage returns `\r` and tabs `\t`.
+
+Some more classes include . - will match any characters and \D will match ONE non-digit character.
+
 ### Flags
 
+Flags change how a regex will search a perticular string. They are placed at the end of a regex,
+
+right after the last foward slash / char. THere are tons of flags but the most common ones are
+
+the global `/g`, multi line `/m` and the case sensitive `/i`.
+
+If you add a global to the end of a regex, the regex wont return after the first match.
+
+`/foo/` No global
+
+<code><mark>foo</mark> foo</code>
+
+`/foo/g` Global
+
+<code><mark>foo</mark> <mark>foo</mark></code>
+
+If you add a multi line `/m` the ^ and $ will match the start/end of a line.
+
+`/^foo$/`
+
+```
+foo
+foo
+```
+
+`/^foo$/m`
+
+<code><mark>foo</mark></code>
+
+<code>foo</code>
+
+The `/i` flag when used will match a specified word regardless of casing.
+
+`/foo/`
+
+<code>FOO</code>
+
+`/foo/i`
+
+<code><mark>FOO</mark></code>
+
 ### Grouping and Capturing
+
+When a regex "captures" a expression it will place it in groups. So if we had a regex like so
+
+`/foobar@gmail.com/`
+
+And captured the string
+
+<code><mark>foobar@gmail.com</mark></code>
+
+This would be group 0 or one group.
+
+If we were to put a grouping parentheses around '(gmail)' it would be stored as different group.
+
+We can refer to these groups and preform operations on just these groups.
+
+We can for example replace certain captured groups using the $. If we were to type $1 in these case, we would get 'gmail' returned.
+
+Lets look at an example
+
+`/foobar@(gmail).(com)/`
+
+Now our character string we are matching
+
+<code><mark>foobar@gmail.com</mark></code>
+
+When we use $1, the regex will return gmail. For $2 it will return com.
+
+We could now replace and check certain groups. For example we could replace a credit card number will XXX-XXX etc...
 
 ### Bracket Expressions
 
@@ -171,5 +266,3 @@ The square bracket will match only one or the other.
 ### Look-ahead and Look-behind
 
 ## Author
-
-A short section about the author with a link to the author's GitHub profile (replace with your information and a link to your profile)
