@@ -4,7 +4,7 @@
 
 ## Summary
 
-Above is a Regular Expression or Regex for short. This perticular Regex finds or "validates" a email. Regex's are very useful in validating and extracting strings of text. In this guide I will explain how they work and what regular expressions are all about.
+Above is a Regular Expression or Regex for short. This particular Regex finds or "validates" a email. Regex's are very useful in validating strings of text. In this guide I will explain how they work and what regular expressions are all about.
 
 To start, regular Expressions use what are called tokens to denote meaning and each token has a perticular use. Every Regex starts and ends with a forward slash /. Lets look at an example,
 
@@ -12,7 +12,7 @@ This is a Regex.
 
 `/foo/`
 
-It searchs for the collection of characters <code><mark>foo</mark></code>
+It searchs for the collection of characters "foo"
 
 It will match any instances of "foo"
 
@@ -20,7 +20,7 @@ It will match any instances of "foo"
 
 <code>bar<mark>foo</mark>bar</code>
 
-I will go over some common token types in this guide.
+This is the most basic regex you can make. I will go over some useful regex tokens in this guide.
 
 ## Table of Contents
 
@@ -34,17 +34,16 @@ I will go over some common token types in this guide.
 - [Greedy and Lazy Match](#greedy-and-lazy-match)
 - [Boundaries](#boundaries)
 - [Back-references](#back-references)
-- [Look-ahead and Look-behind](#look-ahead-and-look-behind)
 
 ## Regex Components
 
 ### Anchors
 
-The first set of tokens we will review are called Anchors. Archors are use to denote the start, end or a word boundary of a Regex.
+The first set of tokens we will review are called Anchors. Anchors are use to denote the start and end or a word boundary of a Regex.
 
 The tokens for anchors are ^ $
 
-^ denotes the start of a string while $ denotes the end of a string.
+^ (carot) denotes the start of a string while $ denotes the end of a string.
 
 Lets look at an example
 
@@ -70,7 +69,7 @@ In the email regex we can see it takes advantage of anchors.
 
 ### Quantifiers
 
-Next up are Quantifiers. This tokens specify how many instances of a certain character to match.
+Next up are Quantifiers. This tokens specify how many instances of a certain character the regex will match.
 
 The first anchor is \*. This will match zero or more of the preceding character.
 
@@ -82,7 +81,9 @@ and
 
 <code><mark>foooooooooooooooo</mark></code>
 
-The + anchor will match one or more character preceding it.
+The + anchor will match one or more characters preceding it.
+
+`/foo+/`
 
 Does not match
 
@@ -110,7 +111,7 @@ For example
 
 <code>foooo</code>
 
-Using a comma , we will match the specify number or more
+Using a comma , we will match the specified number or more
 
 `/foo{3,}/`
 
@@ -180,17 +181,17 @@ Some examples.
 
 You can also match carriage returns `\r` and tabs `\t`.
 
-Some more classes include . - will match any characters and \D will match ONE non-digit character.
+Some more classes include the . and  - will match any characters and \D will match ONE non-digit character.
 
 ### Flags
 
-Flags change how a regex will search a perticular string. They are placed at the end of a regex,
+Flags change how a regex will search a particular string. They are placed at the end of a regex,
 
-right after the last foward slash / char. THere are tons of flags but the most common ones are
+right after the last foward slash / char. TH=here are tons of flags but the most common ones are
 
-the global `/g`, multi line `/m` and the case sensitive `/i`.
+the global `/g`, multi line `/m` and the case insensitive `/i`.
 
-If you add a global to the end of a regex, the regex wont return after the first match.
+If you add a global to the end of a regex, the regex won't return after the first match.
 
 `/foo/` No global
 
@@ -227,7 +228,7 @@ The `/i` flag when used will match a specified word regardless of casing.
 
 ### Grouping and Capturing
 
-When a regex "captures" a expression it will place it in groups. So if we had a regex like so
+When a regex "captures" an expression it will place it in a group. So if we had a regex like so
 
 `/foobar@gmail.com/`
 
@@ -239,9 +240,9 @@ This would be group 0 or one group.
 
 If we were to put a grouping parentheses around '(gmail)' it would be stored as different group.
 
-We can refer to these groups and preform operations on just these groups.
+We can refer to these groups and preform operations on these groups.
 
-We can for example replace certain captured groups using the $. If we were to type $1 in these case, we would get 'gmail' returned.
+We can for example, replace certain captured groups using the $. If we were to type $1 in this case, we would get 'gmail' returned.
 
 Lets look at an example
 
@@ -257,7 +258,7 @@ We could now replace and check certain groups. For example we could replace a cr
 
 ### Bracket Expressions
 
-Bracket expressions are used to match a single character instead the brackets or a collection of characters.
+Bracket expressions are used to match a single character inside the brackets or a collection of characters.
 
 `/[foobar]/` will match <code><mark>foobar</mark></code> 
 
@@ -269,21 +270,21 @@ or if the global flag is used will match all characters inside the brackets
 
 brackets can also have ranges.
 
-`/[a-z]/` will match any lowercase char from a-z. This can be done wil digits also.
+`/[a-z]/` will match any lowercase char from a-z. This can be done with digits also.
 
 `/[^a-e]/` will match any chars that are not in the range of a-e.
 
-There are also . used and == used in bracket notation.
+We can also use .  and == in bracket notation.
 
 ### Greedy and Lazy Match
 
-Greedy and lazy matching refer to how a regex will search. Greedy regexs will consume as many instances as possible we lazy match as few instances as possible.
+Greedy and lazy matching refer to how a regex will search. Greedy regex's will consume as many instances as possible while lazy match's consume as few instances as possible.
 
 For example the + would be considered greedy where a ? would be lazy.
 
 ### Boundaries
 
-Boundaries are like anchors but they only match a workd boundary. 
+Boundaries are like anchors but they only match a word boundary. 
 
 For example
 
@@ -309,7 +310,7 @@ Back references refer to groups. They use \1,\2 and so on.
 
 So now lets try and understand what is going on here
 
-To start off we have our anchor specifying were to start and end the search.
+To start off we have our anchor specifying were to start and end the search ^ and $. Pretty straight foward.
 
 Then we have our first group. Group One
 
@@ -317,7 +318,7 @@ Then we have our first group. Group One
 
 In this group we are looking for any character from a-z and digits 0-9. Also we have to use the case insensitive flag to match capital letters.
 
-we are also allowing any _. or dashes. Note we have a backslash before the . Recall. has a special meaning so we need to escape it with \\.
+We are also allowing any _. or dashes. Note we have a backslash before the ., recall the . has a special meaning so we need to escape it with \\.
 
 We then end with a + (greedy). This makes our first group. "John_doe" will be valid.
 
@@ -345,7 +346,7 @@ Thats it! I hope you learned something new. Now you can put regexs to practice f
 
 ## Author
 
-Hi, my names andrew and i'm a web developer that loves learning and solving problems. You can see my github here
+Hi, my name is Andrew and I'm a web developer that loves learning and solving problems. You can see my github here:
 
 [https://github.com/AgentA12?tab=repositories](https://github.com/AgentA12?tab=repositories)
 
